@@ -19,7 +19,6 @@ import { getAnalytics } from "firebase/analytics";
 
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = firebase.auth();
@@ -34,12 +33,3 @@ db.enablePersistence()
             console.log('Browser doesn\'t support persistence');
         }
     });
-
-
-
-
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
