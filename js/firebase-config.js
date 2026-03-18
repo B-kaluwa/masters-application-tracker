@@ -18,13 +18,14 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase (namespaced SDK)
+firebase.initializeApp(firebaseConfig);
+
+// Create global references
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Enable offline persistence
+// Enable offline persistence (optional but recommended)
 db.enablePersistence()
     .catch((err) => {
         if (err.code == 'failed-precondition') {
