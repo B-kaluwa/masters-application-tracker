@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master's Applications Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1><i class="fas fa-graduation-cap"></i> Master's Applications Tracker</h1>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                    <p class="auth-switch">
+                        Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a>
+                    </p>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-form">
+                    <h2>Sign Up</h2>
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                    <p class="auth-switch">
+                        Already have an account? <a href="#" onclick="showLogin()">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
