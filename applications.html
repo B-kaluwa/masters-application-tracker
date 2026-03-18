@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - Master's Applications Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-graduation-cap"></i> MastersTracker
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html" class="active">Applications</a>
+            <a href="#" id="logoutBtn">Logout</a>
+        </div>
+        <div class="user-info" id="userInfo">
+            <span id="userName"></span>
+        </div>
+    </nav>
+
+    <div class="applications-container">
+        <div class="applications-header">
+            <h1>My Applications</h1>
+            <button class="btn-primary" onclick="openAddApplicationModal()">
+                <i class="fas fa-plus"></i> Add Application
+            </button>
+        </div>
+
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Search universities or programs...">
+            <select id="statusFilter">
+                <option value="">All Statuses</option>
+                <option value="draft">Draft</option>
+                <option value="submitted">Submitted</option>
+                <option value="under-review">Under Review</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+                <option value="waitlisted">Waitlisted</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table id="applicationsTable">
+                <thead>
+                    <tr>
+                        <th>University</th>
+                        <th>Program</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Documents</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="applicationsBody">
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Add New Application</h2>
+            <form id="applicationForm">
+                <input type="hidden" id="appId">
+                
+                <div class="form-group">
+                    <label for="university">University *</label>
+                    <input type="text" id="university" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="program">Program *</label>
+                    <input type="text" id="program" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department">
+                </div>
+
+                <div class="form-group">
+                    <label for="deadline">Application Deadline *</label>
+                    <input type="date" id="deadline" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status *</label>
+                    <select id="status" required>
+                        <option value="draft">Draft</option>
+                        <option value="submitted">Submitted</option>
+                        <option value="under-review">Under Review</option>
+                        <option value="accepted">Accepted</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="waitlisted">Waitlisted</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Documents Required</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="transcript"> Transcripts</label>
+                        <label><input type="checkbox" value="sop"> Statement of Purpose</label>
+                        <label><input type="checkbox" value="lor"> Letters of Recommendation</label>
+                        <label><input type="checkbox" value="resume"> Resume/CV</label>
+                        <label><input type="checkbox" value="testScores"> Test Scores</label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Application</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/applications.js"></script>
+</body>
+</html>
