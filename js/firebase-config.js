@@ -22,3 +22,28 @@ db.enablePersistence()
             console.log('Browser doesn\'t support persistence');
         }
     });
+
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCXZEQ2kXM81vDJ8dq0QzRqRp0x8AYle_Q",
+  authDomain: "masters-applications-tracker.firebaseapp.com",
+  projectId: "masters-applications-tracker",
+  storageBucket: "masters-applications-tracker.firebasestorage.app",
+  messagingSenderId: "111756155732",
+  appId: "1:111756155732:web:417d71eedcb4e5862c86c1",
+  measurementId: "G-5KY6LTY0NM"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
