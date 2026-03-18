@@ -26,12 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
+            // Basic validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 console.log('Login successful:', userCredential.user.email);
                 window.location.href = 'dashboard.html';
             } catch (error) {
-                alert('Login failed: ' + error.message);
+                console.error('Login error:', error.code, error.message);
+                
+                // User-friendly error messages
+                let message = 'Login failed: ';
+                switch(error.code) {
+                    case 'auth/user-not-found':
+                        message += 'No account found with this email';
+                        break;
+                    case 'auth/wrong-password':
+                        message += 'Incorrect password';
+                        break;
+                    case 'auth/too-many-requests':
+                        message += 'Too many failed attempts. Try again later';
+                        break;
+                    default:
+                        message += error.message;
+                }
+                alert(message);
             }
         });
     }
@@ -44,6 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
+            
+            // Validation
+            if (!name || !email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
             
             try {
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
@@ -63,7 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Signup successful');
                 window.location.href = 'dashboard.html';
             } catch (error) {
-                alert('Signup failed: ' + error.message);
+                console.error('Signup error:', error);
+                
+                let message = 'Signup failed: ';
+                switch(error.code) {
+                    case 'auth/email-already-in-use':
+                        message += 'Email already registered';
+                        break;
+                    case 'auth/invalid-email':
+                        message += 'Invalid email address';
+                        break;
+                    case 'auth/weak-password':
+                        message += 'Password is too weak';
+                        break;
+                    default:
+                        message += error.message;
+                }
+                alert(message);
             }
         });
     }
@@ -101,8 +150,3 @@ function showLogin() {
     document.getElementById('signupForm').classList.remove('active');
     document.getElementById('loginForm').classList.add('active');
 }
-
-
-firebase.auth().onAuthStateChanged((user) => {
-    console.log('Auth state changed:', user ? user.email : 'No user');
-});
