@@ -101,3 +101,8 @@ function showLogin() {
     document.getElementById('signupForm').classList.remove('active');
     document.getElementById('loginForm').classList.add('active');
 }
+
+
+firebase.auth().onAuthStateChanged((user) => {
+    console.log('Auth state changed:', user ? user.email : 'No user');
+});
